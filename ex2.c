@@ -31,16 +31,16 @@ int main(int argc,char *argv[]){
 	if(rank < size/2){
 		int destination = size/2 + rank;
 		int source = size/2 + rank;
-		MPI_ISend(&data, 1, MPI_INT, destination, 0, MPI_COMM_WORLD,&send_request);
+		MPI_Isend(&data, 1, MPI_INT, destination, 0, MPI_COMM_WORLD,&send_request);
 		printf("Tarefa %d enviou tarefa para %d.\n", rank, destination);
-		MPI_IRecv(&data, 1, MPI_INT, source, 1, MPI_COMM_WORLD, &recv_request);
+		MPI_Irecv(&data, 1, MPI_INT, source, 1, MPI_COMM_WORLD, &recv_request);
 		printf("Tarefa %d recebeu tarefa de %d.\n", rank, source);
 	} else {
 		int destination = rank - size/2;
 		int source = rank - size/2;
-		MPI_ISend(&data, 1, MPI_INT, destination, 1, MPI_COMM_WORLD,&send_request);
+		MPI_Isend(&data, 1, MPI_INT, destination, 1, MPI_COMM_WORLD,&send_request);
 		printf("Tarefa %d enviou tarefa para %d.\n", rank, destination);
-		MPI_IRecv(&data, 1, MPI_INT, source, 0, MPI_COMM_WORLD, &recv_request);
+		MPI_Irecv(&data, 1, MPI_INT, source, 0, MPI_COMM_WORLD, &recv_request);
 		printf("Tarefa %d recebeu tarefa de %d.\n", rank, source);
 
 	}
